@@ -1,6 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/bcde869b-110f-40dc-a24c-976518ad9b77" alt="Graphite: WebDev Banner" />
-</div>
+  
 
 <div align="center">
   <br />
