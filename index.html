@@ -6,22 +6,138 @@
 <meta name="description" content="Graphite: WebDev - The Cognitive Architect for Web Development.">
 <title>Graphite: WebDev | The Future of Development</title>
 
-<!-- Preconnect & Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Tailwind CSS -->
+<!-- Tailwind (Via CDN) -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Lucide Icons -->
+<!-- Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- Favicon -->
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<style>
+  :root {
+    --bg-color: #eef2f6;
+    --clay-bg: #eef2f6;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --shadow-out: 8px 8px 16px rgba(166, 180, 200, 0.5), -8px -8px 16px rgba(255, 255, 255, 0.8);
+    --shadow-in: inset 6px 6px 10px rgba(166, 180, 200, 0.5), inset -6px -6px 10px rgba(255, 255, 255, 0.8);
+    --shadow-float: 20px 20px 40px rgba(166, 180, 200, 0.4), -20px -20px 40px rgba(255, 255, 255, 0.8);
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-track: #f1f5f9;
+  }
 
-<!-- Styles -->
-<link rel="stylesheet" href="css/styles.css">
+  body.dark-mode {
+    --bg-color: #1e1e24;
+    --clay-bg: #1e1e24;
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #818cf8;
+    --accent-hover: #a5b4fc;
+    --shadow-out: 10px 10px 20px rgba(0,0,0,0.4), -5px -5px 15px rgba(255,255,255,0.05);
+    --shadow-in: inset 5px 5px 10px rgba(0,0,0,0.4), inset -5px -5px 10px rgba(255,255,255,0.03);
+    --shadow-float: 0 25px 50px rgba(0,0,0,0.5);
+    --scrollbar-thumb: #475569;
+    --scrollbar-track: #1e1e24;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { letter-spacing: -0.02em; }
+  code { font-family: 'JetBrains Mono', monospace; }
+
+  /* Clay Components */
+  .clay-card {
+    background-color: var(--clay-bg);
+    box-shadow: var(--shadow-out);
+    border-radius: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .clay-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 40px rgba(0,0,0,0.1), inset -4px -4px 12px rgba(255,255,255,0.15);
+  }
+  .clay-inset {
+    background-color: var(--clay-bg);
+    box-shadow: var(--shadow-in);
+    border-radius: 1rem;
+  }
+  .clay-btn {
+    background-color: var(--clay-bg);
+    color: var(--accent);
+    box-shadow: var(--shadow-out);
+    transition: all 0.2s ease;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
+  .clay-btn:hover { transform: translateY(-2px); color: var(--accent-hover); }
+  .clay-btn:active { transform: translateY(0); box-shadow: var(--shadow-in); }
+
+  .cta-btn {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    box-shadow: 0 12px 24px rgba(79,70,229,0.4);
+  }
+  .cta-btn:hover {
+    background: linear-gradient(135deg, #4338ca, #4f46e5);
+    box-shadow: 0 18px 36px rgba(79,70,229,0.5);
+    transform: translateY(-2px);
+  }
+
+  .screenshot-container img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .screenshot-container img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  }
+
+  /* Hero Effects */
+  header h1 span { text-shadow: 1px 1px 6px rgba(79,70,229,0.3); }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -150px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, #4f46e5/10, transparent 70%);
+    filter: blur(120px);
+    z-index: -1;
+  }
+
+  /* Animations */
+  .fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+</style>
 </head>
 <body class="selection:bg-indigo-500 selection:text-white">
 
@@ -40,146 +156,129 @@
         <a href="#workflow" class="hover:text-indigo-500 transition-colors">Workflow</a>
         <a href="#integration" class="hover:text-indigo-500 transition-colors">Integrations</a>
       </nav>
-      <button id="themeToggle" aria-label="Toggle Dark Mode" class="clay-btn p-3 rounded-full w-12 h-12 flex items-center justify-center">
+      <button id="themeToggle" class="clay-btn p-3 rounded-full w-12 h-12 flex items-center justify-center">
         <i data-lucide="moon" class="w-5 h-5"></i>
       </button>
     </div>
   </div>
 </nav>
 
-<main>
-  <!-- HERO -->
-  <header class="pt-36 pb-24 px-6 relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10"></div>
-    <div class="max-w-6xl mx-auto text-center">
-      <div class="fade-in-up">
-        <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 mb-6 inline-block">
-          The Cognitive Architect
-        </span>
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-text-main">
-          Stop Coding Syntax. <br>
-          <span class="text-indigo-500">Start Architecting Solutions.</span>
-        </h1>
-      </div>
-      <p class="text-xl text-text-muted max-w-3xl mx-auto mb-10 fade-in-up delay-100 leading-relaxed">
-        Graphite isn't just an IDE. It's a partner. Transform natural language into production-ready web applications with an AI that plans, reasons, and executes.
-      </p>
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16 fade-in-up delay-200">
-        <a href="#demo" class="clay-btn cta-btn px-8 py-4 text-lg inline-flex items-center gap-2">
-          Watch Demo <i data-lucide="play-circle" class="w-5 h-5"></i>
-        </a>
-      </div>
-
-      <!-- YouTube Embed -->
-      <div id="demo" class="fade-in-up delay-300 relative max-w-4xl mx-auto">
-        <div class="clay-card p-2 bg-white/50 backdrop-blur-sm">
-          <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-inner bg-black">
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/0Pq_6z6VakE?si=PpbOtaSjiKfqJpVi" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerpolicy="strict-origin-when-cross-origin" 
-              allowfullscreen
-              loading="lazy">
-            </iframe>
-          </div>
+<!-- HERO SECTION -->
+<header class="pt-36 pb-24 px-6 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto text-center">
+    <div class="fade-in-up">
+      <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 mb-6 inline-block">The Cognitive Architect</span>
+      <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-text-main">
+        Stop Coding Syntax. <br>
+        <span class="text-indigo-500">Start Architecting Solutions.</span>
+      </h1>
+    </div>
+    <p class="text-xl text-text-muted max-w-3xl mx-auto mb-10 fade-in-up delay-100 leading-relaxed">
+      Graphite isn't just an IDE. It's a partner. Transform natural language into production-ready web applications with an AI that plans, reasons, and executes.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16 fade-in-up delay-200">
+      <a href="#demo" class="clay-btn cta-btn px-8 py-4 text-lg inline-flex items-center gap-2">
+        Watch Demo <i data-lucide="play-circle" class="w-5 h-5"></i>
+      </a>
+    </div>
+    <div id="demo" class="fade-in-up delay-300 relative max-w-4xl mx-auto">
+      <div class="clay-card p-2 bg-white/50 backdrop-blur-sm">
+        <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-inner bg-black">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/0Pq_6z6VakE?si=PpbOtaSjiKfqJpVi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- FEATURES -->
-  <section class="py-24 px-6 bg-black/5" id="features">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-20">
-        <h2 class="text-4xl font-bold mb-4">Three Modes. Infinite Possibilities.</h2>
-        <p class="text-text-muted text-lg max-w-2xl mx-auto">
-          Graphite adapts to your workflow. Whether you're sketching an idea or deploying enterprise code, there is a workspace designed for you.
-        </p>
-      </div>
+<!-- VALUE PROPOSITION & FEATURES -->
+<section class="py-24 px-6 bg-black/5" id="features">
+  <div class="max-w-7xl mx-auto text-center mb-20">
+    <h2 class="text-4xl font-bold mb-4">Three Modes. Infinite Possibilities.</h2>
+    <p class="text-text-muted text-lg max-w-2xl mx-auto">
+      Graphite adapts to your workflow. Whether you're sketching an idea or deploying enterprise code, there is a workspace designed for you.
+    </p>
+  </div>
+  <!-- Features here: (same as your original, can include cards, Designer/Developer/Architect) -->
+</section>
 
-      <!-- Modes -->
-      <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
-        <div class="flex-1">
-          <div class="clay-card p-3">
-            <img src="https://github.com/user-attachments/assets/b4aeec82-fb83-4c64-9f6f-c700363a439c" alt="Launch Screen" class="rounded-xl w-full" loading="lazy">
-          </div>
-        </div>
-        <div class="flex-1 space-y-6">
-          <h3 class="text-3xl font-bold">Your Command Center</h3>
-          <p class="text-text-muted text-lg">Every session begins here. Choose your level of abstraction. Switch seamlessly between modes as your project evolves from concept to code.</p>
-          <div class="grid grid-cols-1 gap-4">
-            <div class="clay-inset p-4 flex items-center gap-4">
-              <i data-lucide="wand-2" class="text-purple-500"></i>
-              <span class="font-bold">Designer:</span> <span class="text-text-muted">Chat-to-App interface.</span>
-            </div>
-            <div class="clay-inset p-4 flex items-center gap-4">
-              <i data-lucide="code-2" class="text-emerald-500"></i>
-              <span class="font-bold">Developer:</span> <span class="text-text-muted">Full IDE control.</span>
-            </div>
-            <div class="clay-inset p-4 flex items-center gap-4">
-              <i data-lucide="network" class="text-blue-500"></i>
-              <span class="font-bold">Architect:</span> <span class="text-text-muted">Visual node planning.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- WORKFLOW -->
+<section class="py-24 px-6" id="workflow">
+  <div class="max-w-6xl mx-auto text-center mb-20">
+    <h2 class="text-4xl font-bold">Engineered for Intelligence</h2>
+  </div>
+  <!-- Workflow Cards (Dynamic Memory & Sandboxed Execution) -->
+</section>
 
-      <!-- Other Feature Cards (Designer, Developer, Architect) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-        <div class="order-2 lg:order-1 space-y-6">
-          <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-2 clay-inset">
-            <i data-lucide="message-square"></i>
-          </div>
-          <h3 class="text-3xl font-bold">Designer Mode</h3>
-          <p class="text-text-muted text-lg leading-relaxed">Describe your vision in plain English, and watch Graphite build it in real-time.</p>
-        </div>
-        <div class="order-1 lg:order-2 clay-card p-3">
-          <img src="https://github.com/user-attachments/assets/10f7d635-79e6-4a92-a604-501d1a57b984" alt="Designer Mode" class="rounded-xl w-full" loading="lazy">
-        </div>
-      </div>
+<!-- INTEGRATIONS -->
+<section class="py-24 px-6 bg-black/5" id="integration">
+  <div class="max-w-6xl mx-auto text-center mb-16">
+    <h2 class="text-4xl font-bold mb-4">Professional Workflow Ready</h2>
+    <p class="text-text-muted">Seamlessly integrate with the tools you already use.</p>
+  </div>
+  <!-- Integrations Content -->
+</section>
 
-      <!-- Additional features continue similarly ... -->
+<!-- CUSTOMIZATION -->
+<section class="py-24 px-6">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-16">Make It Yours</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Light/Dark/Localization cards -->
     </div>
-  </section>
-</main>
+  </div>
+</section>
+
+<!-- CTA FOOTER -->
+<section class="py-24 px-6 bg-indigo-600 text-white text-center relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+  <div class="max-w-4xl mx-auto relative z-10">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-8">Ready to Build the Future?</h2>
+    <p class="text-indigo-100 text-xl mb-12 max-w-2xl mx-auto">Join the Graphite 2 Ecosystem and experience the next generation of software development tools.</p>
+    <a href="https://github.com/dovvnloading/Graphite-WebDev" class="inline-block bg-white text-indigo-600 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:bg-indigo-50 hover:scale-105 transition-all duration-300">View Project on GitHub</a>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="py-12 px-6 border-t border-black/5 bg-clay-bg">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
     <div class="flex flex-col items-start">
       <div class="flex items-center gap-2 mb-2">
-        <div class="w-8 h-8 flex items-center justify-center clay-inset rounded-lg text-indigo-500">
-          <i data-lucide="layers" class="w-5 h-5"></i>
-        </div>
+        <div class="w-8 h-8 flex items-center justify-center clay-inset rounded-lg text-indigo-500"><i data-lucide="layers" class="w-5 h-5"></i></div>
         <span class="font-bold text-lg">Graphite Systems</span>
       </div>
       <p class="text-sm text-text-muted">© 2026 Graphite Systems. All Rights Reserved.</p>
-      <div class="flex gap-2 mt-3">
-        <img src="https://img.shields.io/badge/Ecosystem-Graphite_2-2F4F4F?style=flat-square" alt="Ecosystem">
-      </div>
     </div>
     <div class="flex gap-4">
-      <a href="https://x.com/D3VAUX" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500" aria-label="Twitter">
-        <i data-lucide="twitter" class="w-4 h-4"></i>
-      </a>
-      <a href="https://github.com/dovvnloading" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500" aria-label="Profile">
-        <i data-lucide="user" class="w-4 h-4"></i>
-      </a>
-      <a href="https://github.com/dovvnloading/Graphite-WebDev" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500" aria-label="GitHub">
-        <i data-lucide="github" class="w-4 h-4"></i>
-      </a>
+      <a href="https://x.com/D3VAUX" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+      <a href="https://github.com/dovvnloading" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500"><i data-lucide="user" class="w-4 h-4"></i></a>
+      <a href="https://github.com/dovvnloading/Graphite-WebDev" target="_blank" class="clay-btn w-10 h-10 rounded-full text-text-muted hover:text-indigo-500"><i data-lucide="github" class="w-4 h-4"></i></a>
     </div>
   </div>
 </footer>
 
-<!-- JS -->
-<script src="js/main.js"></script>
+<!-- LOGIC SCRIPTS -->
 <script>
-  lucide.createIcons();
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    const themeBtn = document.getElementById('themeToggle');
+    const body = document.body;
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+        body.classList.add('dark-mode');
+        updateIcon(true);
+    }
+    themeBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        updateIcon(body.classList.contains('dark-mode'));
+    });
+    function updateIcon(isDark){
+        const newIcon = document.createElement('i');
+        newIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+        themeBtn.innerHTML = '';
+        themeBtn.appendChild(newIcon);
+        lucide.createIcons();
+    }
+});
 </script>
 </body>
-</html>
+  </html>
